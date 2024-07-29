@@ -56,11 +56,11 @@
 
 ;; Map of document mode tokens
 (setq elispdoc-markdown-syntax '((flavor . markdown) (begincode . "```") (endcode . "```")
-			    (header . "#") (subheader . "##") (beginquote . ">")))
+			         (header . "#") (subheader . "##") (beginquote . ">")))
 
 (setq elispdoc-org-syntax '((flavor . org) (begincode . "#+BEGIN_SRC lisp") (endcode . "#+END_SRC")
-		       (header . "*") (subheader . "**") (beginquote . "#+BEGIN_QUOTE\n" )
-		       (endquote . "#+END_QUOTE")))
+		            (header . "*") (subheader . "**") (beginquote . "#+BEGIN_QUOTE\n" )
+		            (endquote . "#+END_QUOTE")))
 
 ;; Allow the user to pick between markdown, org and any future doc flavors
 (defvar elispdoc-syntax elispdoc-markdown-syntax "Mapping used to determine the flavor of the output doc file")
@@ -127,7 +127,7 @@
 	(forward-line -1)
 	(beginning-of-line)
 	t)
-      nil)) 
+    nil))
 
 ;; Return line of next line that starts with a comment or nil if there isn't one but doesn't
 ;; move the cursor (hardcoded comment char)
@@ -197,7 +197,7 @@
 	(insert "\n;;" (alist-get 'beginquote elispdoc-syntax)  docstring "\n")
 	(when  (alist-get 'endquote elispdoc-syntax)
 	  (insert "\n;;" (alist-get 'endquote elispdoc-syntax))))
-	)))
+      )))
 
 ;; Process and move past the next sexp
 ;;  - Add a function header if needed
@@ -245,12 +245,12 @@
 ;; Replace a regular expression on the current line
 (defun eld--regex-replace-on-line (exp replace)
   (save-excursion
-   (beginning-of-line)
-   (let ((start (point))
-	 (end ()))
-     (forward-line)
-     (setq end (point))
-     (replace-regexp-in-region exp replace start end))))
+    (beginning-of-line)
+    (let ((start (point))
+	  (end ()))
+      (forward-line)
+      (setq end (point))
+      (replace-regexp-in-region exp replace start end))))
 
 ;; Wrapper for using org-make-toc
 (defun eld--add-toc-org ()
@@ -262,7 +262,7 @@
    ":CONTENTS:\n"
    ":END:\n")
   (org-make-toc))
-  
+
 ;; setup a table of contents using markdown-toc
 ;; Placed after Code: comment
 (defun eld--add-toc ()
@@ -306,3 +306,5 @@
       ;; Insert a toc after Code: if specified
       (when elispdoc-include-toc
 	(eld--add-toc)))))
+
+(provide 'elispdoc)
